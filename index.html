@@ -1,31 +1,18 @@
-<!doctype html>
-<html lang="ja">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>GA4 Test Site</title>
+<a href="mailto:test@example.com" id="contact">Contact</a>
 
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6WZKF324KJ"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-6WZKF324KJ');
-  </script>
-</head>
+<script>
+  document.getElementById('contact').addEventListener('click', function (e) {
+    e.preventDefault(); // まず遷移を止める
 
-<body>
-  <h1>GA4 Test Site</h1>
-  <p>This is a test page for Google Analytics 4.</p>
-
-  <a href="mailto:test@example.com" id="contact">Contact</a>
-
-  <script>
-    // Send a GA4 event when the Contact link is clicked
-    document.getElementById('contact').addEventListener('click', function () {
-      gtag('event', 'contact_click');
+    gtag('event', 'contact_click', {
+      event_callback: function () {
+        window.location.href = 'mailto:test@example.com'; // 送信後に遷移
+      }
     });
-  </script>
-</body>
-</html>
+
+    // callbackが動かない/遅い環境の保険
+    setTimeout(function () {
+      window.location.href = 'mailto:test@example.com';
+    }, 800);
+  });
+</script>
