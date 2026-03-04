@@ -12,7 +12,7 @@
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
 
-    // Force debug mode so DebugView can see this browser
+    // Debug mode for DebugView (remove later for "production" behavior)
     gtag('config', 'G-6WZKF324KJ', { debug_mode: true });
   </script>
 </head>
@@ -21,9 +21,14 @@
   <h1>GA4 Test Site</h1>
   <p>This is a test page for Google Analytics 4.</p>
 
-  <a href="mailto:test@example.com" id="contact">Contact</a>
+  <!-- Contact -->
+  <p><a href="mailto:test@example.com" id="contact">Contact</a></p>
+
+  <!-- Download (dummy file) -->
+  <p><a href="./cv.pdf" id="download_cv" download>Download CV</a></p>
 
   <script>
+    // Contact click -> send event -> then open mailto
     document.getElementById('contact').addEventListener('click', function (e) {
       e.preventDefault();
 
@@ -32,6 +37,18 @@
       setTimeout(function () {
         window.location.href = 'mailto:test@example.com';
       }, 800);
+    });
+
+    // Download click -> send event -> then continue to download
+    document.getElementById('download_cv').addEventListener('click', function (e) {
+      // Some browsers start download immediately; we delay slightly to increase chance event is sent
+      e.preventDefault();
+
+      gtag('event', 'cv_download_click', { debug_mode: true });
+
+      setTimeout(function () {
+        window.location.href = './cv.pdf';
+      }, 400);
     });
   </script>
 </body>
