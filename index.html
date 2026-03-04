@@ -14,15 +14,18 @@
     gtag('config', 'G-6WZKF324KJ');
   </script>
 </head>
+
 <body>
   <h1>GA4 Test Site</h1>
   <p>This is a test page for Google Analytics 4.</p>
-<a href="mailto:test@example.com" id="contact">Contact</a>
 
-<script>
-  // ContactクリックをGA4イベントとして送る
-  document.getElementById('contact').addEventListener('click', function() {
-    gtag('event', 'contact_click');
-  });
-</script></body>
+  <a href="mailto:test@example.com" id="contact">Contact</a>
+
+  <script>
+    // Send a GA4 event when the Contact link is clicked
+    document.getElementById('contact').addEventListener('click', function () {
+      gtag('event', 'contact_click');
+    });
+  </script>
+</body>
 </html>
